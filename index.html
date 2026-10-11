@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[BRAND NAME] — Denim accessories</title>
+<meta name="description" content="Denim laptop sleeves, totes, pouches and cardholders. Browse the first collection and enquire on WhatsApp.">
+<meta property="og:title" content="[BRAND NAME] — Denim accessories">
+<meta property="og:description" content="Everyday essentials, reimagined in denim.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/hero-denim.jpg"><!-- replace with a full URL after publishing -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23243B63'/%3E%3Cpath d='M9 22V10h6a6 6 0 010 12z' fill='none' stroke='%23F7F5F0' stroke-width='2' stroke-dasharray='3 2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Colours, fonts and radii live here. Change them once. */
+:root{--indigo:#243B63;--wash:#6F8FAF;--paper:#F7F5F0;--sand:#E9E2D7;--ink:#242424;--thread:#C48A3F;--r:10px;
+--serif:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;font:400 1rem/1.6 var(--sans);color:var(--ink);background:var(--paper);overflow-x:hidden}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0 0 .5em;color:var(--indigo)}
+h1{font-size:clamp(2.4rem,7vw,4.6rem);letter-spacing:-.02em}h2{font-size:clamp(1.8rem,4vw,2.6rem)}h3{font-size:1.25rem}
+p{max-width:60ch}a{color:inherit}
+:focus-visible{outline:3px solid var(--thread);outline-offset:2px}
+.wrap{width:min(1160px,100% - 2.5rem);margin-inline:auto}.section{padding:4.5rem 0 1rem}
+.skip{position:absolute;left:-999px}.skip:focus{left:8px;top:8px;background:#fff;padding:.5rem;z-index:99}
+.note{font-size:.85rem;color:#5a5a5a}.lede{color:#4a4a4a}
+.announce{background:var(--indigo);color:var(--paper);text-align:center;font-size:.875rem;padding:.45rem 1rem}.announce p{margin:0 auto}
+.site-header{position:sticky;top:0;z-index:20;background:rgba(247,245,240,.96);border-bottom:1px solid var(--sand)}
+.bar{display:flex;align-items:center;justify-content:space-between;min-height:60px;gap:1rem}
+.wordmark{display:inline-flex;align-items:center;gap:.5rem;font:600 1.2rem var(--serif);color:var(--indigo);text-decoration:none}
+nav{display:flex;align-items:center;gap:1.4rem}nav a{text-decoration:none;font-weight:500}nav a:not(.btn):hover{color:var(--wash)}
+.menu-btn{display:none;font:inherit;background:none;border:1px solid var(--indigo);color:var(--indigo);border-radius:var(--r);padding:.5rem 1rem;min-height:44px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.6rem 1.3rem;border-radius:var(--r);font:600 .95rem var(--sans);text-decoration:none;border:1.5px solid var(--indigo);cursor:pointer;transition:background .2s,color .2s}
+.btn-solid{background:var(--indigo);color:var(--paper)}.btn-solid:hover{background:var(--ink);border-color:var(--ink)}
+.btn-line{background:none;color:var(--indigo)}.btn-line:hover{background:var(--sand)}
+.btn-light{background:var(--paper);color:var(--indigo);border-color:var(--paper)}.btn-ghost{background:none;color:var(--paper);border-color:rgba(247,245,240,.6)}.btn-ghost:hover,.btn-light:hover{background:var(--sand);color:var(--indigo)}
+.btn[aria-disabled=true]{opacity:.55;cursor:not-allowed}
+/* denim twill texture, used by every placeholder */
+.ph,.hero-art,.swatch{--w:var(--indigo);background:repeating-linear-gradient(135deg,rgba(255,255,255,.07) 0 2px,transparent 2px 5px),repeating-linear-gradient(45deg,rgba(0,0,0,.08) 0 1px,transparent 1px 4px),var(--w)}
+.ph{aspect-ratio:4/5;border-radius:var(--r);overflow:hidden;position:relative}.ph svg,.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph .tag{position:absolute;left:10px;bottom:8px;font-size:.7rem;color:rgba(255,255,255,.75)}
+.stitched{position:relative}.stitched::after{content:"";position:absolute;inset:14px;border:2px dashed var(--thread);border-radius:6px;pointer-events:none;opacity:.9}
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:3rem;align-items:center;padding:3.5rem 0}
+.hero-copy p{font-size:1.15rem}.actions{display:flex;flex-wrap:wrap;gap:.8rem;margin:1.6rem 0 1rem}
+.hero-art{--w:#2d4a78;border-radius:var(--r);aspect-ratio:4/4.4;display:grid;place-items:center;padding:12%}.hero-art svg{width:100%;height:100%}
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.cat{all:unset;box-sizing:border-box;cursor:pointer;display:block;border:1px solid var(--sand);border-radius:var(--r);background:#fff;overflow:hidden}
+.cat .ph{aspect-ratio:1;border-radius:0}.cat span{display:block;padding:.8rem 1rem}.cat b{font:400 1.1rem var(--serif);color:var(--indigo);display:block}.cat small{color:#555}
+.cat:hover,.cat:focus-visible{border-color:var(--indigo)}
+.head-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:1.5rem}
+.filters{display:flex;flex-wrap:wrap;gap:.5rem}.chip{font:500 .9rem var(--sans);min-height:44px;padding:.4rem 1rem;border-radius:99px;border:1px solid var(--indigo);background:none;color:var(--indigo);cursor:pointer}
+.chip[aria-pressed=true]{background:var(--indigo);color:var(--paper)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem 1.2rem}
+.card{display:flex;flex-direction:column;gap:.5rem}.card .ph{cursor:pointer}.card .ph:hover svg{transform:scale(1.03)}.ph svg{transition:transform .4s}
+.badge{position:absolute;top:10px;left:10px;z-index:2;background:var(--paper);color:var(--indigo);font-size:.75rem;font-weight:600;padding:.15rem .6rem;border-radius:99px}
+.card h3{margin:.3rem 0 0}.card p{margin:0;font-size:.95rem}.price{font-weight:600;color:var(--indigo)}
+.row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.4rem}.row .btn{flex:1 1 auto;min-width:130px}
+.story{background:var(--sand);margin-top:4.5rem}.split{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;padding:4.5rem 0}
+.swatch{--w:#3a5a8a;border-radius:var(--r);aspect-ratio:1;max-height:440px;width:100%}
+.craft{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}.craft article{border-top:2px solid var(--indigo);padding-top:1rem}.craft p{font-size:.95rem}
+.link{font-weight:600;color:var(--indigo)}
+.steps{max-width:62ch;padding-left:1.2rem}.steps li{padding:.4rem 0}
+.contact{background:var(--indigo);color:var(--paper);margin-top:4.5rem}.contact h2{color:var(--paper)}.contact .note{color:#c9d3e3}
+.contact-links{display:flex;flex-direction:column;gap:.8rem;align-items:flex-start}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2rem;padding:3rem 0 2rem;font-size:.95rem}.foot nav{flex-direction:column;align-items:flex-start;gap:.4rem}
+.policies{list-style:none;padding:0;margin:0;color:#666}.copy{grid-column:1/-1;border-top:1px solid var(--sand);padding-top:1rem;margin:0}
+dialog{border:0;border-radius:var(--r);padding:1.5rem;width:min(820px,94vw);max-height:92vh;background:var(--paper)}dialog::backdrop{background:rgba(20,28,45,.6)}
+.dlg-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}.close{float:right;margin-bottom:.5rem;min-height:44px;padding:0 1rem;border:1px solid var(--indigo);background:none;border-radius:var(--r);color:var(--indigo);font:inherit;cursor:pointer}
+.opts{padding-left:1.1rem;font-size:.95rem}
+@media(max-width:900px){.hero,.split,.dlg-grid{grid-template-columns:1fr}.cats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:repeat(2,1fr)}.craft{grid-template-columns:repeat(2,1fr)}.foot{grid-template-columns:1fr}.hero-art{aspect-ratio:1}}
+@media(max-width:720px){.menu-btn{display:block}nav{display:none;position:absolute;top:100%;left:0;right:0;background:var(--paper);flex-direction:column;align-items:stretch;padding:1rem 1.25rem;border-bottom:1px solid var(--sand)}nav.open{display:flex}nav a{padding:.5rem 0}}
+@media(max-width:520px){.grid,.craft{grid-template-columns:1fr}.dlg-grid .ph{aspect-ratio:1}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#shop">Skip to products</a>
+<div class="announce" id="announce" hidden><p id="announceText"></p></div>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="wordmark" href="#top" aria-label="Home"><svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="currentColor"/><path d="M10 23V9h6a7 7 0 010 14z" fill="none" stroke="#F7F5F0" stroke-width="2" stroke-dasharray="3 2"/></svg><span data-brand>[BRAND NAME]</span></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav id="nav" aria-label="Main">
+      <a href="#shop">Shop</a><a href="#story">Our Story</a><a href="#craft">Materials &amp; Craft</a><a href="#contact">Contact</a>
+      <a class="btn btn-solid" href="#shop">Shop Collection</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero wrap">
+  <div class="hero-copy">
+    <h1>Everyday essentials. Reimagined in denim.</h1>
+    <p>Functional accessories shaped by the character, texture, and versatility of denim.</p>
+    <div class="actions"><a class="btn btn-solid" href="#shop">Explore the Collection</a><a class="btn btn-line" href="#story">Our Story</a></div>
+    <p class="note">First collection. Designs and prices are provisional.</p>
+  </div>
+  <div class="hero-art stitched" id="heroArt" role="img" aria-label="Placeholder illustration of a denim laptop sleeve"></div>
+</section>
+
+<section class="wrap section" aria-labelledby="cat-h">
+  <h2 id="cat-h">Shop by category</h2>
+  <div class="cats" id="cats"></div>
+</section>
+
+<section class="wrap section" id="shop" aria-labelledby="shop-h">
+  <div class="head-row"><h2 id="shop-h">The first collection</h2><div class="filters" id="filters" role="group" aria-label="Filter products"></div></div>
+  <div class="grid" id="grid"></div>
+  <noscript><p>Please enable JavaScript to browse the products, or contact us to ask about the range.</p></noscript>
+  <p class="note">Prices are indicative. Products shown are concepts and samples, not confirmed stock.</p>
+</section>
+
+<section class="story" id="story">
+  <div class="wrap split">
+    <div class="swatch stitched" aria-hidden="true"></div>
+    <div>
+      <h2>Our Story</h2>
+      <p>We believe everyday accessories deserve thoughtful design. Our aim is to turn a familiar material into functional pieces that combine character, practicality, and personal style.</p>
+      <p>We choose the denim, design the range, and work with manufacturing partners to bring it to life.</p>
+      <p class="note">Draft copy. Edit in index.html.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap section" id="craft" aria-labelledby="craft-h">
+  <h2 id="craft-h">Materials &amp; craft</h2>
+  <p class="lede">Examples of what the collection may offer. Final specifications will be confirmed per product.</p>
+  <div class="craft">
+    <article><h3>Denim character</h3><p>Texture, weight, and a wash that softens with use.</p></article>
+    <article><h3>Stitching &amp; construction</h3><p>Visible seams and contrast thread as part of the design.</p></article>
+    <article><h3>Functional details</h3><p>Zips, pockets, and linings chosen for daily use.</p></article>
+    <article><h3>Customisation</h3><p>Illustrative options: different washes, contrast stitching, initials, patchwork. Subject to final products and manufacturing capability.</p><a class="link" data-wa="custom" href="#contact">Ask about customisation</a></article>
+  </div>
+</section>
+
+<section class="wrap section" aria-labelledby="order-h">
+  <h2 id="order-h">How to order</h2>
+  <ol class="steps">
+    <li><strong>Explore the collection.</strong> Pick the pieces you like.</li>
+    <li><strong>Contact us.</strong> Message us about the product you want.</li>
+    <li><strong>Confirm the details.</strong> We confirm availability, customisation, pricing, payment, and delivery with you.</li>
+  </ol>
+  <p class="note">An enquiry is not a confirmed order. This website does not take payments.</p>
+</section>
+
+<section class="contact" id="contact" aria-labelledby="contact-h">
+  <div class="wrap split">
+    <div><h2 id="contact-h">Ask us anything</h2><p>Questions about a product, a custom idea, or availability? Message us and we will reply.</p></div>
+    <div class="contact-links"><a class="btn btn-light" data-wa="general" href="#contact">Message on WhatsApp</a><a class="btn btn-ghost" id="igLink" href="#contact">Instagram</a><a class="btn btn-ghost" id="mailLink" href="#contact">Email us</a><p class="note" id="cfgNote"></p></div>
+  </div>
+</section>
+</main>
+
+<footer class="wrap foot">
+  <div><span class="wordmark" data-brand>[BRAND NAME]</span><p>Denim accessories, designed for everyday use.</p></div>
+  <nav aria-label="Footer"><a href="#shop">Shop</a><a href="#story">Our Story</a><a href="#craft">Materials &amp; Craft</a><a href="#contact">Contact</a></nav>
+  <ul class="policies"><li>Privacy policy (placeholder)</li><li>Terms (placeholder)</li><li>Shipping policy (placeholder)</li><li>Returns policy (placeholder)</li></ul>
+  <p class="copy">&copy; <span id="year">2026</span> <span data-brand>[BRAND NAME]</span></p>
+</footer>
+
+<dialog id="dlg" aria-labelledby="dName">
+  <button class="close" id="dClose" aria-label="Close product details">Close</button>
+  <div class="dlg-grid"><div class="ph" id="dImg"></div>
+    <div><h3 id="dName"></h3><p class="price" id="dPrice"></p><p id="dDesc"></p>
+      <ul class="opts" id="dOpts"></ul><p class="note" id="dStatus"></p>
+      <a class="btn btn-solid" id="dWa" href="#contact">Enquire on WhatsApp</a></div></div>
+</dialog>
+<script>
+/* ===== CONFIGURATION: edit this block ===== */
+const CONFIG = {
+  BRAND_NAME: "[BRAND NAME]",
+  WHATSAPP_NUMBER: "",   // international format, digits only, e.g. "919876543210"
+  INSTAGRAM_URL: "",     // e.g. "https://instagram.com/yourbrand"
+  EMAIL: "",             // e.g. "hello@example.com"
+  ANNOUNCEMENT: "Introducing our first collection.", // set "" to hide the bar
+};
+/* Prices are PROVISIONAL placeholders (INR). Set `image` to a file in /images/ to replace the placeholder art. */
+const PRODUCTS = [
+  {id:"daily-sleeve",name:"The Daily Sleeve",category:"Laptop Sleeves",price:1499,shape:"sleeve",wash:"#2d4a78",image:"",alt:"Denim laptop sleeve",featured:true,availabilityStatus:"Concept. Availability to be confirmed.",description:"A slim denim sleeve for a laptop, with a clean zip and soft lining.",options:["Wash (illustrative)","Contrast stitching (illustrative)","Fits 13-14 inch laptops (placeholder size)"]},
+  {id:"everyday-tote",name:"The Everyday Tote",category:"Bags & Totes",price:1799,shape:"tote",wash:"#4a6a98",image:"",alt:"Denim tote bag",featured:true,availabilityStatus:"Concept. Availability to be confirmed.",description:"A roomy tote in sturdy denim for work, errands, and weekends.",options:["Inner pocket (illustrative)","Initials (illustrative)","Dimensions: placeholder"]},
+  {id:"utility-pouch",name:"The Utility Pouch",category:"Pouches & Organisers",price:699,shape:"pouch",wash:"#6F8FAF",image:"",alt:"Compact denim organiser pouch",featured:false,availabilityStatus:"Sample. Availability to be confirmed.",description:"A compact organiser for cables, pens, and small essentials.",options:["Wash (illustrative)","Contrast stitching (illustrative)"]},
+  {id:"cardholder",name:"The Cardholder",category:"Wallets & Cardholders",price:599,shape:"card",wash:"#1f3355",image:"",alt:"Minimalist denim cardholder",featured:false,availabilityStatus:"Concept. Availability to be confirmed.",description:"A minimalist denim cardholder for cards and a few notes.",options:["Monogram (illustrative)","Thread colour (illustrative)"]},
+  {id:"carry-all",name:"The Carry-All",category:"Pouches & Organisers",price:999,shape:"carry",wash:"#3a5a8a",image:"",alt:"Versatile denim pouch",featured:true,availabilityStatus:"Concept. Availability to be confirmed.",description:"A versatile pouch or small bag with room for the day's essentials.",options:["Pocket layout (illustrative)","Wash (illustrative)"]},
+  {id:"patchwork-sleeve",name:"The Patchwork Sleeve",category:"Laptop Sleeves",price:1999,shape:"patch",wash:"#2d4a78",image:"",alt:"Patchwork denim laptop sleeve",featured:false,availabilityStatus:"Concept. Availability to be confirmed.",description:"A laptop sleeve with patchwork panels in mixed denim washes.",options:["Patch mix (illustrative)","Fits 13-14 inch laptops (placeholder size)"]},
+];
+const CATEGORIES = [
+  {name:"Laptop Sleeves",shape:"sleeve",text:"Protection with character"},
+  {name:"Bags & Totes",shape:"tote",text:"Carry the day"},
+  {name:"Wallets & Cardholders",shape:"card",text:"Small and sharp"},
+  {name:"Pouches & Organisers",shape:"pouch",text:"Everything in its place"},
+];
+/* ===== END CONFIGURATION ===== */
+
+const $ = s => document.querySelector(s);
+const inr = n => "\u20B9" + n.toLocaleString("en-IN");
+const waOK = /^\d{8,15}$/.test(CONFIG.WHATSAPP_NUMBER);
+const waURL = msg => "https://wa.me/" + CONFIG.WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function art(shape){ // simple SVG product silhouettes on denim texture
+  const f='fill="rgba(10,20,40,.28)" stroke="#C48A3F" stroke-width="2" stroke-dasharray="6 4"';
+  const S={
+    sleeve:`<rect x="45" y="45" width="110" height="110" rx="10" ${f}/><path d="M45 70h110" stroke="#F7F5F0" stroke-width="2" opacity=".6"/>`,
+    tote:`<path d="M70 85c0-40 60-40 60 0" fill="none" stroke="#C48A3F" stroke-width="5"/><path d="M45 85h110l-8 85H53z" ${f}/>`,
+    pouch:`<rect x="40" y="75" width="120" height="70" rx="12" ${f}/><path d="M48 92h104" stroke="#F7F5F0" stroke-width="3" stroke-dasharray="2 3" opacity=".7"/>`,
+    card:`<rect x="55" y="70" width="90" height="62" rx="8" ${f}/><path d="M55 92h90" stroke="#F7F5F0" stroke-width="2" opacity=".5"/>`,
+    carry:`<rect x="38" y="62" width="124" height="88" rx="12" ${f}/><path d="M38 90c40 14 84 14 124 0" fill="none" stroke="#F7F5F0" stroke-width="2" opacity=".6"/><rect x="82" y="112" width="36" height="26" rx="4" fill="none" stroke="#C48A3F" stroke-width="2"/>`,
+    patch:`<rect x="45" y="45" width="110" height="110" rx="10" ${f}/><rect x="55" y="55" width="42" height="42" fill="rgba(111,143,175,.6)"/><rect x="103" y="103" width="42" height="42" fill="rgba(233,226,215,.5)"/><rect x="103" y="55" width="42" height="42" fill="rgba(36,59,99,.6)"/>`
+  };
+  return `<svg viewBox="0 0 200 200" aria-hidden="true">${S[shape]||S.sleeve}</svg>`;
+}
+window.__art = art;
+function visual(p){
+  const wash=`style="--w:${p.wash||"#243B63"}"`;
+  if(!p.image) return `<div class="ph" ${wash} role="img" aria-label="${esc(p.alt)} (placeholder illustration)">${art(p.shape)}<span class="tag">Placeholder image</span></div>`;
+  return `<div class="ph" ${wash}><img src="${esc(p.image)}" alt="${esc(p.alt)}" loading="lazy" width="800" height="1000" onerror="this.outerHTML=window.__art('${p.shape}')"></div>`;
+}
+
+document.querySelectorAll("[data-brand]").forEach(e=>e.textContent=CONFIG.BRAND_NAME);
+document.title = CONFIG.BRAND_NAME + " \u2014 Denim accessories";
+if(CONFIG.ANNOUNCEMENT){$("#announceText").textContent=CONFIG.ANNOUNCEMENT;$("#announce").hidden=false}
+$("#year").textContent = new Date().getFullYear();
+$("#heroArt").innerHTML = art("sleeve");
+
+function setLink(el,ok,href,missing){
+  if(ok){el.href=href;if(href.startsWith("http"))el.target="_blank";el.rel="noopener";el.removeAttribute("aria-disabled");el.removeAttribute("title")}
+  else{el.removeAttribute("href");el.setAttribute("aria-disabled","true");el.title=missing}
+}
+document.querySelectorAll("[data-wa]").forEach(a=>setLink(a,waOK,waURL(`Hi! I'm interested in ${a.dataset.wa==="custom"?"customisation options":"your products"} from ${CONFIG.BRAND_NAME}. Could you share the details?`),"WhatsApp number not set"));
+setLink($("#igLink"),/^https?:\/\//.test(CONFIG.INSTAGRAM_URL),CONFIG.INSTAGRAM_URL,"Instagram URL not set");
+setLink($("#mailLink"),!!CONFIG.EMAIL,"mailto:"+CONFIG.EMAIL,"Email not set");
+const miss=[!waOK&&"WhatsApp number",!CONFIG.INSTAGRAM_URL&&"Instagram URL",!CONFIG.EMAIL&&"email"].filter(Boolean);
+if(miss.length)$("#cfgNote").textContent="Setup reminder: add your "+miss.join(", ")+" in js/script.js.";
+
+let active="All";
+const filters=$("#filters");
+["All",...CATEGORIES.map(c=>c.name)].forEach(n=>{
+  const b=document.createElement("button");b.className="chip";b.textContent=n;b.setAttribute("aria-pressed",n==="All");
+  b.onclick=()=>setFilter(n);filters.appendChild(b);
+});
+$("#cats").innerHTML=CATEGORIES.map(c=>`<button class="cat" data-c="${esc(c.name)}"><div class="ph" style="--w:#2d4a78">${art(c.shape)}</div><span><b>${esc(c.name)}</b><small>${esc(c.text)}</small></span></button>`).join("");
+document.querySelectorAll(".cat").forEach(b=>b.onclick=()=>{setFilter(b.dataset.c);$("#shop").scrollIntoView({behavior:"smooth"})});
+function setFilter(n){active=n;filters.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed",c.textContent===n));render()}
+
+const enq=p=>`Hi! I'm interested in the ${p.name} from ${CONFIG.BRAND_NAME}. Could you share the details and availability?`;
+function render(){
+  const list=PRODUCTS.filter(p=>active==="All"||p.category===active);
+  $("#grid").innerHTML=list.map(p=>`<article class="card"><div style="position:relative" data-open="${p.id}">${p.featured?'<span class="badge">Featured</span>':""}${visual(p)}</div>
+  <h3>${esc(p.name)}</h3><p>${esc(p.description)}</p><p class="price">${inr(p.price)} <span class="note">(provisional)</span></p>
+  <div class="row"><button class="btn btn-line" data-open="${p.id}">View Details</button>${waOK?`<a class="btn btn-solid" target="_blank" rel="noopener" href="${waURL(enq(p))}">Enquire on WhatsApp</a>`:""}</div></article>`).join("");
+  document.querySelectorAll("[data-open]").forEach(e=>e.onclick=()=>openDlg(e.dataset.open));
+}
+
+const dlg=$("#dlg");
+function openDlg(id){
+  const p=PRODUCTS.find(x=>x.id===id);if(!p)return;
+  $("#dImg").innerHTML=visual(p);
+  $("#dName").textContent=p.name;$("#dPrice").textContent=inr(p.price)+" (provisional)";$("#dDesc").textContent=p.description;
+  $("#dOpts").innerHTML=p.options.map(o=>`<li>${esc(o)}</li>`).join("");$("#dStatus").textContent=p.availabilityStatus+" This is an enquiry, not an order.";
+  setLink($("#dWa"),waOK,waURL(enq(p)),"WhatsApp number not set");
+  dlg.showModal();
+}
+$("#dClose").onclick=()=>dlg.close();
+dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
+render();
+
+const nav=$("#nav"),mb=$("#menuBtn");
+mb.onclick=()=>{const o=nav.classList.toggle("open");mb.setAttribute("aria-expanded",o)};
+nav.querySelectorAll("a").forEach(a=>a.onclick=()=>{nav.classList.remove("open");mb.setAttribute("aria-expanded","false")});
+
+</script>
+</body>
+</html>
