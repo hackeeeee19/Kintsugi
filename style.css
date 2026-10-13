@@ -1,6 +1,14 @@
 /* Colours, fonts and radii live here. Change them once. */
-:root{--indigo:#243B63;--wash:#6F8FAF;--paper:#F7F5F0;--sand:#E9E2D7;--ink:#242424;--thread:#C48A3F;--r:10px;
---serif:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+:root{
+  --indigo:#203D56;
+  --wash:#762C35;
+  --paper:#F3EBDD;
+  --sand:#E2D7C6;
+  --ink:#292722;
+  --thread:#762C35;
+  --r:10px;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
 body{margin:0;font:400 1rem/1.6 var(--sans);color:var(--ink);background:var(--paper);overflow-x:hidden}
 h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0 0 .5em;color:var(--indigo)}
