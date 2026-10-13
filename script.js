@@ -54,22 +54,10 @@ document.title = CONFIG.BRAND_NAME + " \u2014 Denim accessories";
 if(CONFIG.ANNOUNCEMENT){$("#announceText").textContent=CONFIG.ANNOUNCEMENT;$("#announce").hidden=false}
 $("#year").textContent = new Date().getFullYear();
 function setHero(){
-  const e = $("#heroArt");
-  e.classList.remove("stitched");
-  e.style.padding = "0";
-  e.style.overflow = "hidden";
-  e.innerHTML = `<img
-    src="reweave-logo.png"
-    alt="ReWeave logo"
-    width="1536"
-    height="1024"
-    fetchpriority="high"
-    decoding="async"
-    style="width:100%;height:100%;object-fit:contain;object-position:center;background:var(--paper);padding:5%;border-radius:var(--r)"
-  >`;
-  e.setAttribute("aria-label", "ReWeave logo");
+const hp=PRODUCTS.find(p=>p.id===CONFIG.HERO_PRODUCT);
+if(hp&&hp.image){const e=$("#heroArt");e.classList.remove("stitched");e.style.padding="0";e.style.overflow="hidden";e.innerHTML=`<img src="${esc(hp.image)}" alt="${esc(hp.alt)}" width="800" height="880" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:${esc(hp.focus||"center")};border-radius:var(--r)" onerror="this.remove()">`;e.setAttribute("aria-label",hp.alt)}
+else $("#heroArt").innerHTML = art("sleeve");
 }
-
 setHero();
 
 function setLink(el,ok,href,missing){
