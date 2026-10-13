@@ -7,7 +7,7 @@ const CONFIG = {
   ANNOUNCEMENT: "Introducing our first collection.", // set "" to hide the bar
   HERO_PRODUCT: "carry-all", // id of the product whose photo shows in the hero; "" for the illustration
 };
-/* Prices are PROVISIONAL placeholders (INR). Set `image` to a file in /images/ to replace the placeholder art. */
+/* Prices are PROVISIONAL placeholders (INR). Set `image` to a photo file next to index.html to replace the placeholder art. */
 const PRODUCTS = [
   {id:"daily-sleeve",name:"The Daily Sleeve",category:"Laptop Sleeves",price:1299,shape:"sleeve",wash:"#2d4a78",image:"laptop-sleeve.jpg",focus:"50% 50%",alt:"Light denim sleeve with a wooden button and elastic loop closure (sample photo)",featured:true,availabilityStatus:"Concept. Availability to be confirmed.",description:"A padded light-wash denim sleeve with a contrast-stitched centre seam and a wooden button and loop closure.",options:["Wash (illustrative)","Closure style (illustrative)","Size: to be confirmed (placeholder)"]},
   {id:"everyday-tote",name:"The Everyday Tote",category:"Bags & Totes",price:1799,shape:"tote",wash:"#4a6a98",image:"everyday-tote.jpg",focus:"50% 45%",alt:"Denim tote bag with patterned fabric handles and lining (sample photo)",featured:true,availabilityStatus:"Concept. Availability to be confirmed.",description:"A roomy denim tote with front pockets, a printed patchwork lining and matching fabric handles.",options:["Lining and handle print (illustrative)","Pockets (illustrative)","Dimensions: placeholder"]},
@@ -46,7 +46,7 @@ window.__art = art;
 function visual(p){
   const wash=`style="--w:${p.wash||"#243B63"}"`;
   if(!p.image) return `<div class="ph" ${wash} role="img" aria-label="${esc(p.alt)} (placeholder illustration)">${art(p.shape)}</div>`;
-  return `<div class="ph" ${wash}><img src="${esc(p.image)}" alt="${esc(p.alt)}" loading="lazy" width="800" height="1000" style="object-position:${esc(p.focus||"center")}" onerror="this.outerHTML=window.__art('${p.shape}')"></div>`;
+  return `<div class="ph" ${wash}><img src="${esc(p.image)}" alt="${esc(p.alt)}" loading="lazy" decoding="async" width="800" height="1000" style="object-position:${esc(p.focus||"center")}" onerror="this.outerHTML=window.__art('${p.shape}')"></div>`;
 }
 
 document.querySelectorAll("[data-brand]").forEach(e=>e.textContent=CONFIG.BRAND_NAME);
@@ -55,7 +55,7 @@ if(CONFIG.ANNOUNCEMENT){$("#announceText").textContent=CONFIG.ANNOUNCEMENT;$("#a
 $("#year").textContent = new Date().getFullYear();
 function setHero(){
 const hp=PRODUCTS.find(p=>p.id===CONFIG.HERO_PRODUCT);
-if(hp&&hp.image){const e=$("#heroArt");e.classList.remove("stitched");e.style.padding="0";e.style.overflow="hidden";e.innerHTML=`<img src="${esc(hp.image)}" alt="${esc(hp.alt)}" width="800" height="880" style="width:100%;height:100%;object-fit:cover;object-position:${esc(hp.focus||"center")};border-radius:var(--r)" onerror="this.remove()">`;e.setAttribute("aria-label",hp.alt)}
+if(hp&&hp.image){const e=$("#heroArt");e.classList.remove("stitched");e.style.padding="0";e.style.overflow="hidden";e.innerHTML=`<img src="${esc(hp.image)}" alt="${esc(hp.alt)}" width="800" height="880" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:${esc(hp.focus||"center")};border-radius:var(--r)" onerror="this.remove()">`;e.setAttribute("aria-label",hp.alt)}
 else $("#heroArt").innerHTML = art("sleeve");
 }
 setHero();
@@ -83,7 +83,7 @@ function render(){
   const list=PRODUCTS.filter(p=>active==="All"||p.category===active);
   $("#grid").innerHTML=list.map(p=>`<article class="card"><div style="position:relative" data-open="${p.id}">${p.featured?'<span class="badge">Featured</span>':""}${visual(p)}</div>
   <h3>${esc(p.name)}</h3><p>${esc(p.description)}</p><p class="price">${inr(p.price)} <span class="note">(provisional)</span></p>
-  <div class="row"><button class="btn btn-line" data-open="${p.id}">View Details</button>${waOK?`<a class="btn btn-solid" target="_blank" rel="noopener" href="${waURL(enq(p))}">Enquire on WhatsApp</a>`:""}</div></article>`).join("");
+  <div class="row"><button class="btn btn-line" data-open="${p.id}">View Details</button><button class="btn btn-solid" type="button" data-add="${p.id}"${p.unavailable?" disabled":""}>${p.unavailable?"Unavailable":needsOpts(p)?"Choose options":"Add to Bag"}</button></div>${waOK?`<a class="link small" target="_blank" rel="noopener" href="${waURL(enq(p))}">Enquire on WhatsApp</a>`:""}</article>`).join("");
   document.querySelectorAll("[data-open]").forEach(e=>e.onclick=()=>openDlg(e.dataset.open));
 }
 
@@ -94,7 +94,7 @@ function openDlg(id){
   $("#dName").textContent=p.name;$("#dPrice").textContent=inr(p.price)+" (provisional)";$("#dDesc").textContent=p.description;
   $("#dOpts").innerHTML=p.options.map(o=>`<li>${esc(o)}</li>`).join("");$("#dStatus").textContent=p.availabilityStatus+" This is an enquiry, not an order.";
   setLink($("#dWa"),waOK,waURL(enq(p)),"WhatsApp number not set");
-  dlg.showModal();
+  curP=p;buildSel(p);lockScroll();dlg.showModal();
 }
 $("#dClose").onclick=()=>dlg.close();
 dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
@@ -127,3 +127,99 @@ nav.querySelectorAll("a").forEach(a=>a.onclick=()=>{nav.classList.remove("open")
 
 // Lets the single-file build add photos after the page has rendered.
 window.applyImages=function(map){PRODUCTS.forEach(p=>{if(map[p.id])p.image=map[p.id]});render();setHero()};
+
+// ===== Shopping bag (client-side, saved in localStorage) =====
+// Optional product fields: sizes:["S","M"], colours:["Indigo"], unavailable:true. Prices must be numbers.
+const CART_KEY="reweave.cart.v1",MAXQ=99,cartDlg=$("#cart");
+let cart=[],canStore=true,curP=null;
+const prod=id=>PRODUCTS.find(p=>p.id===id),fmt=n=>n.toLocaleString("en-IN");
+function needsOpts(p){return !!((p.sizes&&p.sizes.length)||(p.colours&&p.colours.length))}
+const keyOf=l=>[l.pid,l.size,l.colour].join("|"),lineTotal=l=>prod(l.pid).price*l.qty;
+const count=()=>cart.reduce((n,l)=>n+l.qty,0),subtotal=()=>cart.reduce((s,l)=>s+lineTotal(l),0);
+const waNow=()=>/^\d{8,15}$/.test(CONFIG.WHATSAPP_NUMBER);
+function el(t,c,x){const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function clean(raw){const out=[];if(!Array.isArray(raw))return out;
+  raw.forEach(l=>{if(!l||typeof l!=="object")return;const p=prod(l.pid);if(!p||p.unavailable)return;
+    const q=Number(l.qty);if(!Number.isInteger(q)||q<1)return;
+    const size=String(l.size||""),colour=String(l.colour||"");
+    if((p.sizes||[]).length?!p.sizes.includes(size):size)return;
+    if((p.colours||[]).length?!p.colours.includes(colour):colour)return;
+    const ex=out.find(o=>keyOf(o)===keyOf({pid:p.id,size,colour}));
+    if(ex)ex.qty=Math.min(MAXQ,ex.qty+q);else out.push({pid:p.id,size,colour,qty:Math.min(MAXQ,q)})});
+  return out}
+function load(){let raw=null;try{raw=localStorage.getItem(CART_KEY)}catch(e){canStore=false}
+  try{cart=clean(JSON.parse(raw||"[]"))}catch(e){cart=[]}}
+function save(){if(!canStore)return;try{localStorage.setItem(CART_KEY,JSON.stringify(cart))}catch(e){canStore=false}}
+function changed(){save();renderBag()}
+function add(pid,size,colour,qty){
+  const p=prod(pid);size=size||"";colour=colour||"";qty=Number(qty||1);
+  if(!p||p.unavailable||!Number.isInteger(qty)||qty<1)return false;
+  if((p.sizes||[]).length?!p.sizes.includes(size):(size=""))return false;
+  if((p.colours||[]).length?!p.colours.includes(colour):(colour=""))return false;
+  const ex=cart.find(l=>keyOf(l)===keyOf({pid,size,colour}));
+  if(ex)ex.qty=Math.min(MAXQ,ex.qty+qty);else cart.push({pid,size,colour,qty:Math.min(MAXQ,qty)});
+  changed();toast(p.name+" added to bag");return true}
+function setQty(k,q){const l=cart.find(x=>keyOf(x)===k);if(!l||!Number.isInteger(q)||q<1||q>MAXQ)return;l.qty=q;changed()}
+function removeLine(k){cart=cart.filter(l=>keyOf(l)!==k);changed()}
+let tt;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("on"),2200)}
+function lockScroll(){document.body.style.overflow="hidden"}
+[dlg,cartDlg].forEach(d=>d.addEventListener("close",()=>{if(!dlg.open&&!cartDlg.open)document.body.style.overflow=""}));
+function openCart(){renderBag();lockScroll();cartDlg.showModal()}
+function renderBag(){
+  const n=count(),b=$("#bagBtn");$("#bagCount").textContent=n;b.dataset.n=n;b.setAttribute("aria-label","Open bag, "+n+" item"+(n===1?"":"s"));
+  const body=$("#cartBody");body.textContent="";$("#cartFoot").hidden=!n;$("#cartStore").hidden=canStore;
+  if(!n){body.append(el("p","","Your bag is empty."));const c=el("button","btn btn-solid","Continue shopping");c.type="button";
+    c.onclick=()=>{cartDlg.close();$("#shop").scrollIntoView({behavior:"smooth"})};body.append(c);return}
+  const ul=el("ul","ci-list");
+  cart.forEach(l=>{const p=prod(l.pid),k=keyOf(l),li=el("li","ci"),th=el("div","ci-img"),bd=el("div","ci-body"),sd=el("div","ci-side");
+    th.innerHTML=visual(p); // catalogue data, escaped inside visual()
+    bd.append(el("strong","",p.name));
+    const meta=[l.size&&"Size: "+l.size,l.colour&&"Colour: "+l.colour].filter(Boolean).join(" \u00B7 ");
+    if(meta)bd.append(el("span","note",meta));
+    bd.append(el("span","note",inr(p.price)+" each"));
+    const mk=(t,lab,fn,dis)=>{const x=el("button","",t);x.type="button";x.setAttribute("aria-label",lab);x.disabled=!!dis;x.onclick=fn;return x};
+    const q=el("div","qty");q.append(mk("\u2212","Decrease quantity of "+p.name,()=>setQty(k,l.qty-1),l.qty<=1),el("output","",l.qty),mk("+","Increase quantity of "+p.name,()=>setQty(k,l.qty+1),l.qty>=MAXQ));
+    bd.append(q);
+    const rm=el("button","link small","Remove");rm.type="button";rm.setAttribute("aria-label","Remove "+p.name+" from bag");rm.onclick=()=>removeLine(k);
+    sd.append(el("span","",inr(lineTotal(l))),rm);li.append(th,bd,sd);ul.append(li)});
+  body.append(ul);$("#cartN").textContent=n;$("#cartSub").textContent=inr(subtotal())}
+function buildMsg(){
+  const L=["Hello "+CONFIG.BRAND_NAME+"! I'd like to enquire about placing an order.","","*My Order*",""];
+  cart.forEach((l,i)=>{const p=prod(l.pid);L.push((i+1)+". Product: "+p.name);
+    if(l.size)L.push("   Size: "+l.size);if(l.colour)L.push("   Colour: "+l.colour);
+    L.push("   Quantity: "+l.qty,"   Unit Price: \u20B9"+fmt(p.price),"   Item Total: \u20B9"+fmt(lineTotal(l)),"")});
+  L.push("Merchandise Subtotal: \u20B9"+fmt(subtotal()),"(Delivery charges, taxes and any discounts are not included and are not yet confirmed.)","","Please confirm availability, delivery charges, and the next steps to place my order.","","Thank you!");
+  return L.join("\n")}
+function showFb(note,msg,url){$("#cartFbMsg").textContent=note;$("#cartFbText").value=msg;$("#cartCopy").textContent="Copy message";
+  const a=$("#cartFbLink");a.hidden=!url;if(url)a.href=url;$("#cartFb").hidden=false}
+let busy=false;
+$("#checkout").onclick=()=>{
+  if(!cart.length||busy)return;busy=true;setTimeout(()=>busy=false,800);
+  const msg=buildMsg();
+  if(!waNow()){showFb("The WhatsApp number isn't set up yet. Copy this message and send it to us on WhatsApp.",msg);return}
+  const url=waURL(msg),w=window.open(url,"_blank");
+  if(w){try{w.opener=null}catch(e){}$("#cartFb").hidden=true;toast("WhatsApp opened. Review and send your message. Your bag is kept.")}
+  else showFb("Your browser blocked WhatsApp from opening. Use the button below, or copy the message.",msg,url)};
+$("#cartCopy").onclick=async()=>{const t=$("#cartFbText");try{await navigator.clipboard.writeText(t.value)}catch(e){t.select();document.execCommand("copy")}$("#cartCopy").textContent="Copied"};
+$("#cartClear").onclick=()=>{cart=[];changed()};
+$("#bagBtn").onclick=openCart;$("#cartClose").onclick=()=>cartDlg.close();
+cartDlg.addEventListener("click",e=>{if(e.target===cartDlg)cartDlg.close()});
+$("#grid").addEventListener("click",e=>{const b=e.target.closest("[data-add]");if(!b)return;const p=prod(b.dataset.add);if(!p)return;
+  if(needsOpts(p)){openDlg(p.id);return}
+  if(add(p.id)){b.textContent="Added \u2713";setTimeout(()=>{b.textContent="Add to Bag"},1200)}});
+function buildSel(p){
+  const s=$("#dSel");s.textContent="";
+  const field=(id,label,arr)=>{const w=el("label","sel-f"),x=document.createElement("select"),o=el("option","","Select "+label.toLowerCase());o.value="";x.id=id;x.append(o);
+    arr.forEach(v=>{const o2=el("option","",v);o2.value=v;x.append(o2)});w.append(el("span","",label),x);return w};
+  if((p.sizes||[]).length)s.append(field("dSize","Size",p.sizes));
+  if((p.colours||[]).length)s.append(field("dColour","Colour",p.colours));
+  const out=el("output","",1);out.id="dQty";const mk=(t,lab,d)=>{const x=el("button","",t);x.type="button";x.setAttribute("aria-label",lab);x.onclick=()=>{out.textContent=Math.min(MAXQ,Math.max(1,Number(out.textContent)+d))};return x};
+  const q=el("div","qty");q.append(mk("\u2212","Decrease quantity",-1),out,mk("+","Increase quantity",1));
+  const w=el("div","sel-f");w.append(el("span","","Quantity"),q);s.append(w);
+  const er=el("p","err","");er.id="dErr";er.setAttribute("role","alert");s.append(er);
+  $("#dAdd").disabled=!!p.unavailable;$("#dAdd").textContent=p.unavailable?"Unavailable":"Add to Bag"}
+$("#dAdd").onclick=()=>{const p=curP;if(!p)return;const sz=$("#dSize"),co=$("#dColour"),er=$("#dErr");
+  if(sz&&!sz.value){er.textContent="Please select a size.";sz.focus();return}
+  if(co&&!co.value){er.textContent="Please select a colour.";co.focus();return}
+  if(add(p.id,sz?sz.value:"",co?co.value:"",Number($("#dQty").textContent))){dlg.close();openCart()}else er.textContent="Sorry, that couldn't be added."};
+load();save();renderBag();
