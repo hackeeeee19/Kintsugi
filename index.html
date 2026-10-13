@@ -8,13 +8,14 @@
 <meta property="og:title" content="ReWeave — Denim accessories">
 <meta property="og:description" content="Everyday essentials, reimagined in denim.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="images/hero-denim.jpg"><!-- replace with a full URL after publishing -->
+<meta property="og:image" content="hero-denim.jpg"><!-- replace with a full URL after publishing -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23243B63'/%3E%3Cpath d='M9 22V10h6a6 6 0 010 12z' fill='none' stroke='%23F7F5F0' stroke-width='2' stroke-dasharray='3 2'/%3E%3C/svg%3E">
+<link rel="preload" as="image" href="carry-all.jpg" fetchpriority="high"><!-- hero photo: must match HERO_PRODUCT image in js/script.js -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap"></noscript>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <a class="skip" href="#shop">Skip to products</a>
@@ -27,6 +28,7 @@
     <nav id="nav" aria-label="Main">
       <span class="pill" aria-hidden="true"></span><a href="#shop">Shop</a><a href="#story">Our Story</a><a href="#craft">Materials &amp; Craft</a><a href="#contact">Contact</a>
     </nav>
+    <button class="bag-btn" id="bagBtn" data-n="0" aria-label="Open bag, 0 items" aria-haspopup="dialog"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg><span class="bag-n" id="bagCount">0</span></button>
   </div>
 </header>
 
@@ -105,8 +107,22 @@
   <div class="dlg-grid"><div class="ph" id="dImg"></div>
     <div><h3 id="dName"></h3><p class="price" id="dPrice"></p><p id="dDesc"></p>
       <ul class="opts" id="dOpts"></ul><p class="note" id="dStatus"></p>
-      <a class="btn btn-solid" id="dWa" href="#contact">Enquire on WhatsApp</a></div></div>
+      <div class="sel" id="dSel"></div>
+      <div class="row"><button class="btn btn-solid" id="dAdd" type="button">Add to Bag</button><a class="btn btn-line" id="dWa" href="#contact">Enquire on WhatsApp</a></div></div></div>
 </dialog>
-<script src="script.js"></script>
+<dialog id="cart" class="drawer" aria-labelledby="cartH">
+  <div class="drawer-head"><h2 id="cartH">Your bag</h2><button class="close" id="cartClose" type="button" aria-label="Close bag">Close</button></div>
+  <div class="drawer-body" id="cartBody"></div>
+  <div class="drawer-foot" id="cartFoot" hidden>
+    <p class="row-between"><span>Subtotal (<span id="cartN">0</span> items)</span><strong id="cartSub"></strong></p>
+    <p class="note">Merchandise subtotal only. Delivery charges, taxes and any discounts are not included and will be confirmed with you on WhatsApp. This is an enquiry, not a confirmed order.</p>
+    <p class="note" id="cartStore" hidden>Your bag can't be saved in this browser and will be lost when you close the page.</p>
+    <button class="btn btn-solid wide" id="checkout" type="button">Checkout via WhatsApp</button>
+    <div class="fb" id="cartFb" hidden><p class="note" id="cartFbMsg"></p><textarea id="cartFbText" readonly rows="6" aria-label="Order message"></textarea><div class="row"><button class="btn btn-line" id="cartCopy" type="button">Copy message</button><a class="btn btn-line" id="cartFbLink" target="_blank" rel="noopener" hidden>Open WhatsApp</a></div></div>
+    <button class="link" id="cartClear" type="button">Clear bag</button>
+  </div>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="js/script.js" data-cfasync="false"></script>
 </body>
 </html>
