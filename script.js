@@ -194,6 +194,36 @@ function showFb(note,msg,url){$("#cartFbMsg").textContent=note;$("#cartFbText").
   const a=$("#cartFbLink");a.hidden=!url;if(url)a.href=url;$("#cartFb").hidden=false}
 let busy=false;
 $("#checkout").onclick=()=>{
+  if(!cart.length||busy)return;
+  busy=true;
+  setTimeout(()=>busy=false,800);
+
+  // Build the message from the latest cart contents.
+  const msg=buildMsg();
+
+  if(!waNow()){
+    showFb(
+      "The WhatsApp number isn't set up yet. Copy this message and send it to us on WhatsApp.",
+      msg
+    );
+    return;
+  }
+
+  const url=waURL(msg);
+  const w=window.open(url,"_blank");
+
+  if(w){
+    try{w.opener=null}catch(e){}
+    $("#cartFb").hidden=true;
+    toast("WhatsApp opened. Review and send your message. Your bag is kept.");
+  }else{
+    showFb(
+      "Your browser blocked WhatsApp from opening. Use the button below, or copy the message.",
+      buildMsg(),
+      waURL(buildMsg())
+    );
+  }
+};
   if(!cart.length||busy)return;busy=true;setTimeout(()=>busy=false,800);
   const msg=buildMsg();
   if(!waNow()){showFb("The WhatsApp number isn't set up yet. Copy this message and send it to us on WhatsApp.",msg);return}
