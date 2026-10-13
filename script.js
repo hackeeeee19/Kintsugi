@@ -70,6 +70,8 @@ function setHero(){
   e.setAttribute("aria-label", "ReWeave logo");
 }
 
+setHero();
+
 function setLink(el,ok,href,missing){
   if(ok){el.href=href;if(href.startsWith("http"))el.target="_blank";el.rel="noopener";el.removeAttribute("aria-disabled");el.removeAttribute("title")}
   else{el.removeAttribute("href");el.setAttribute("aria-disabled","true");el.title=missing}
