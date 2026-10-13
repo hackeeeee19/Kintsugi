@@ -150,7 +150,21 @@ function clean(raw){const out=[];if(!Array.isArray(raw))return out;
 function load(){let raw=null;try{raw=localStorage.getItem(CART_KEY)}catch(e){canStore=false}
   try{cart=clean(JSON.parse(raw||"[]"))}catch(e){cart=[]}}
 function save(){if(!canStore)return;try{localStorage.setItem(CART_KEY,JSON.stringify(cart))}catch(e){canStore=false}}
-function changed(){save();renderBag()}
+function changed(){
+  save();
+  renderBag();
+
+  // Keep the order message synced with the latest cart.
+  if(!$("#cartFb").hidden){
+    const msg=buildMsg();
+    $("#cartFbText").value=msg;
+
+    const link=$("#cartFbLink");
+    if(!link.hidden){
+      link.href=waURL(msg);
+    }
+  }
+}
 function add(pid,size,colour,qty){
   const p=prod(pid);size=size||"";colour=colour||"";qty=Number(qty||1);
   if(!p||p.unavailable||!Number.isInteger(qty)||qty<1)return false;
