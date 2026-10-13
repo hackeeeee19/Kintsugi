@@ -1,7 +1,7 @@
 /* ===== CONFIGURATION: edit this block ===== */
 const CONFIG = {
   BRAND_NAME: "ReWeave",
-  WHATSAPP_NUMBER: "",   // international format, digits only, e.g. "919876543210"
+  WHATSAPP_NUMBER: "919667461993",   // international format, digits only, e.g. "919876543210"
   INSTAGRAM_URL: "",     // e.g. "https://instagram.com/yourbrand"
   EMAIL: "",             // e.g. "hello@example.com"
   ANNOUNCEMENT: "Introducing our first collection.", // set "" to hide the bar
