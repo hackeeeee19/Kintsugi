@@ -9,12 +9,12 @@ const CONFIG = {
 };
 /* Prices are PROVISIONAL placeholders (INR). Set `image` to a photo file next to index.html to replace the placeholder art. */
 const PRODUCTS = [
-  {id:"daily-sleeve",name:"The Daily Sleeve",category:"Laptop Sleeves",price:1299,shape:"sleeve",wash:"#2d4a78",image:"laptop-sleeve.jpg",focus:"50% 50%",alt:"Light denim sleeve with a wooden button and elastic loop closure (sample photo)",featured:true,availabilityStatus:"Concept. Availability to be confirmed.",description:"A padded light-wash denim sleeve with a contrast-stitched centre seam and a wooden button and loop closure.",options:["Wash (illustrative)","Closure style (illustrative)","Size: to be confirmed (placeholder)"]},
-  {id:"everyday-tote",name:"The Everyday Tote",category:"Bags & Totes",price:1799,shape:"tote",wash:"#4a6a98",image:"everyday-tote.jpg",focus:"50% 45%",alt:"Denim tote bag with patterned fabric handles and lining (sample photo)",featured:true,availabilityStatus:"Concept. Availability to be confirmed.",description:"A roomy denim tote with front pockets, a printed patchwork lining and matching fabric handles.",options:["Lining and handle print (illustrative)","Pockets (illustrative)","Dimensions: placeholder"]},
-  {id:"utility-pouch",name:"The Utility Pouch",category:"Pouches & Organisers",price:699,shape:"pouch",wash:"#6F8FAF",image:"utility-pouch.jpg",focus:"50% 55%",alt:"Stack of denim zip pouches with coloured zips (sample photo)",featured:false,availabilityStatus:"Sample. Availability to be confirmed.",description:"Flat zip pouches in mixed denim washes with bright contrast zips, for cables, pens and small essentials.",options:["Wash (illustrative)","Zip colour (illustrative)","Zip charm (illustrative)"]},
-  {id:"cardholder",name:"The Cardholder",category:"Wallets & Cardholders",price:599,shape:"card",wash:"#1f3355",image:"",alt:"Minimalist denim cardholder",featured:false,availabilityStatus:"Concept. Availability to be confirmed.",description:"A minimalist denim cardholder for cards and a few notes.",options:["Monogram (illustrative)","Thread colour (illustrative)"]},
-  {id:"carry-all",name:"The Carry-All",category:"Pouches & Organisers",price:899,shape:"carry",wash:"#3a5a8a",image:"carry-all.jpg",focus:"50% 55%",alt:"Denim zip pouch with a pocket detail and floral lining (sample photo)",featured:true,availabilityStatus:"Concept. Availability to be confirmed.",description:"A zip pouch with a jeans-style pocket, red contrast stitching and a floral lining.",options:["Lining print (illustrative)","Stitching colour (illustrative)","Size: to be confirmed (placeholder)"]},
-  {id:"patchwork-sleeve",name:"The Patchwork Sleeve",category:"Laptop Sleeves",price:1499,shape:"patch",wash:"#2d4a78",image:"patchwork-sleeve.jpg",focus:"50% 35%",alt:"Denim sleeve with a star-print fabric band and lace trim (sample photo)",featured:false,availabilityStatus:"Concept. Availability to be confirmed.",description:"A light denim sleeve with a star-print fabric band, lace trim and a wooden button and cord closure.",options:["Band fabric and trim (illustrative)","Closure style (illustrative)","Size: to be confirmed (placeholder)"]},
+  {id:"daily-sleeve",name:"The Daily Sleeve",category:"Laptop Sleeves",price:1299,shape:"sleeve",wash:"#1D3B59",image:"laptop-sleeve.jpg",focus:"50% 50%",alt:"Light denim sleeve with a wooden button and elastic loop closure (sample photo)",featured:true,availabilityStatus:"Concept. Availability to be confirmed.",description:"A padded light-wash denim sleeve with a contrast-stitched centre seam and a wooden button and loop closure.",options:["Wash (illustrative)","Closure style (illustrative)","Size: to be confirmed (placeholder)"]},
+  {id:"everyday-tote",name:"The Everyday Tote",category:"Bags & Totes",price:1799,shape:"tote",wash:"#365C7C",image:"everyday-tote.jpg",focus:"50% 45%",alt:"Denim tote bag with patterned fabric handles and lining (sample photo)",featured:true,availabilityStatus:"Concept. Availability to be confirmed.",description:"A roomy denim tote with front pockets, a printed patchwork lining and matching fabric handles.",options:["Lining and handle print (illustrative)","Pockets (illustrative)","Dimensions: placeholder"]},
+  {id:"utility-pouch",name:"The Utility Pouch",category:"Pouches & Organisers",price:699,shape:"pouch",wash:"#58728B",image:"utility-pouch.jpg",focus:"50% 55%",alt:"Stack of denim zip pouches with coloured zips (sample photo)",featured:false,availabilityStatus:"Sample. Availability to be confirmed.",description:"Flat zip pouches in mixed denim washes with bright contrast zips, for cables, pens and small essentials.",options:["Wash (illustrative)","Zip colour (illustrative)","Zip charm (illustrative)"]},
+  {id:"cardholder",name:"The Cardholder",category:"Wallets & Cardholders",price:599,shape:"card",wash:"#162E47",image:"",alt:"Minimalist denim cardholder",featured:false,availabilityStatus:"Concept. Availability to be confirmed.",description:"A minimalist denim cardholder for cards and a few notes.",options:["Monogram (illustrative)","Thread colour (illustrative)"]},
+  {id:"carry-all",name:"The Carry-All",category:"Pouches & Organisers",price:899,shape:"carry",wash:"#315877",image:"carry-all.jpg",focus:"50% 55%",alt:"Denim zip pouch with a pocket detail and floral lining (sample photo)",featured:true,availabilityStatus:"Concept. Availability to be confirmed.",description:"A zip pouch with a jeans-style pocket, red contrast stitching and a floral lining.",options:["Lining print (illustrative)","Stitching colour (illustrative)","Size: to be confirmed (placeholder)"]},
+  {id:"patchwork-sleeve",name:"The Patchwork Sleeve",category:"Laptop Sleeves",price:1499,shape:"patch",wash:"#1D3B59",image:"patchwork-sleeve.jpg",focus:"50% 35%",alt:"Denim sleeve with a star-print fabric band and lace trim (sample photo)",featured:false,availabilityStatus:"Concept. Availability to be confirmed.",description:"A light denim sleeve with a star-print fabric band, lace trim and a wooden button and cord closure.",options:["Band fabric and trim (illustrative)","Closure style (illustrative)","Size: to be confirmed (placeholder)"]},
 ];
 const CATEGORIES = [
   {name:"Laptop Sleeves",shape:"sleeve",text:"Protection with character"},
@@ -31,20 +31,20 @@ const waURL = msg => "https://wa.me/" + CONFIG.WHATSAPP_NUMBER + "?text=" + enco
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
 function art(shape){ // simple SVG product silhouettes on denim texture
-  const f='fill="rgba(10,20,40,.28)" stroke="#C48A3F" stroke-width="2" stroke-dasharray="6 4"';
+  const f='fill="rgba(29,59,89,.28)" stroke="#7A202C" stroke-width="2" stroke-dasharray="6 4"';
   const S={
-    sleeve:`<rect x="45" y="45" width="110" height="110" rx="10" ${f}/><path d="M45 70h110" stroke="#F7F5F0" stroke-width="2" opacity=".6"/>`,
-    tote:`<path d="M70 85c0-40 60-40 60 0" fill="none" stroke="#C48A3F" stroke-width="5"/><path d="M45 85h110l-8 85H53z" ${f}/>`,
-    pouch:`<rect x="40" y="75" width="120" height="70" rx="12" ${f}/><path d="M48 92h104" stroke="#F7F5F0" stroke-width="3" stroke-dasharray="2 3" opacity=".7"/>`,
-    card:`<rect x="55" y="70" width="90" height="62" rx="8" ${f}/><path d="M55 92h90" stroke="#F7F5F0" stroke-width="2" opacity=".5"/>`,
-    carry:`<rect x="38" y="62" width="124" height="88" rx="12" ${f}/><path d="M38 90c40 14 84 14 124 0" fill="none" stroke="#F7F5F0" stroke-width="2" opacity=".6"/><rect x="82" y="112" width="36" height="26" rx="4" fill="none" stroke="#C48A3F" stroke-width="2"/>`,
-    patch:`<rect x="45" y="45" width="110" height="110" rx="10" ${f}/><rect x="55" y="55" width="42" height="42" fill="rgba(111,143,175,.6)"/><rect x="103" y="103" width="42" height="42" fill="rgba(233,226,215,.5)"/><rect x="103" y="55" width="42" height="42" fill="rgba(36,59,99,.6)"/>`
+    sleeve:`<rect x="45" y="45" width="110" height="110" rx="10" ${f}/><path d="M45 70h110" stroke="#F4EDE2" stroke-width="2" opacity=".6"/>`,
+    tote:`<path d="M70 85c0-40 60-40 60 0" fill="none" stroke="#7A202C" stroke-width="5"/><path d="M45 85h110l-8 85H53z" ${f}/>`,
+    pouch:`<rect x="40" y="75" width="120" height="70" rx="12" ${f}/><path d="M48 92h104" stroke="#F4EDE2" stroke-width="3" stroke-dasharray="2 3" opacity=".7"/>`,
+    card:`<rect x="55" y="70" width="90" height="62" rx="8" ${f}/><path d="M55 92h90" stroke="#F4EDE2" stroke-width="2" opacity=".5"/>`,
+    carry:`<rect x="38" y="62" width="124" height="88" rx="12" ${f}/><path d="M38 90c40 14 84 14 124 0" fill="none" stroke="#F4EDE2" stroke-width="2" opacity=".6"/><rect x="82" y="112" width="36" height="26" rx="4" fill="none" stroke="#7A202C" stroke-width="2"/>`,
+    patch:`<rect x="45" y="45" width="110" height="110" rx="10" ${f}/><rect x="55" y="55" width="42" height="42" fill="rgba(88,114,139,.6)"/><rect x="103" y="103" width="42" height="42" fill="rgba(244,237,226,.5)"/><rect x="103" y="55" width="42" height="42" fill="rgba(29,59,89,.6)"/>`
   };
   return `<svg viewBox="0 0 200 200" aria-hidden="true">${S[shape]||S.sleeve}</svg>`;
 }
 window.__art = art;
 function visual(p){
-  const wash=`style="--w:${p.wash||"#243B63"}"`;
+  const wash=`style="--w:${p.wash||"#1D3B59"}"`;
   if(!p.image) return `<div class="ph" ${wash} role="img" aria-label="${esc(p.alt)} (placeholder illustration)">${art(p.shape)}</div>`;
   return `<div class="ph" ${wash}><img src="${esc(p.image)}" alt="${esc(p.alt)}" loading="lazy" decoding="async" width="800" height="1000" style="object-position:${esc(p.focus||"center")}" onerror="this.outerHTML=window.__art('${p.shape}')"></div>`;
 }
@@ -74,7 +74,7 @@ const filters=$("#filters");
   const b=document.createElement("button");b.className="chip";b.textContent=n;b.setAttribute("aria-pressed",n==="All");
   b.onclick=()=>setFilter(n);filters.appendChild(b);
 });
-$("#cats").innerHTML=CATEGORIES.map(c=>`<button class="cat" data-c="${esc(c.name)}"><div class="ph" style="--w:#2d4a78">${art(c.shape)}</div><span><b>${esc(c.name)}</b><small>${esc(c.text)}</small></span></button>`).join("");
+$("#cats").innerHTML=CATEGORIES.map(c=>`<button class="cat" data-c="${esc(c.name)}"><div class="ph" style="--w:#1D3B59">${art(c.shape)}</div><span><b>${esc(c.name)}</b><small>${esc(c.text)}</small></span></button>`).join("");
 document.querySelectorAll(".cat").forEach(b=>b.onclick=()=>{setFilter(b.dataset.c);$("#shop").scrollIntoView({behavior:"smooth"})});
 function setFilter(n){active=n;filters.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed",c.textContent===n));render()}
 
