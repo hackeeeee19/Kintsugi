@@ -1,14 +1,6 @@
 /* Colours, fonts and radii live here. Change them once. */
-:root{
-  --indigo:#203D56;
-  --wash:#762C35;
-  --paper:#F3EBDD;
-  --sand:#E2D7C6;
-  --ink:#292722;
-  --thread:#762C35;
-  --r:10px;
-  --serif:"Fraunces",Georgia,"Times New Roman",serif;
-  --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif
+:root{--indigo:#243B63;--wash:#6F8FAF;--paper:#F7F5F0;--sand:#E9E2D7;--ink:#242424;--thread:#C48A3F;--r:10px;
+--serif:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
 body{margin:0;font:400 1rem/1.6 var(--sans);color:var(--ink);background:var(--paper);overflow-x:hidden}
 h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0 0 .5em;color:var(--indigo)}
@@ -25,7 +17,7 @@ p{max-width:60ch}a{color:inherit}
 nav{display:flex;align-items:center;gap:.25rem;position:relative}nav a{text-decoration:none;font-weight:500}nav a:not(.btn):hover{color:var(--wash)}
 .menu-btn{display:none;font:inherit;background:none;border:1px solid var(--indigo);color:var(--indigo);border-radius:var(--r);padding:.5rem 1rem;min-height:44px}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.6rem 1.3rem;border-radius:var(--r);font:600 .95rem var(--sans);text-decoration:none;border:1.5px solid var(--indigo);cursor:pointer;transition:background .2s,color .2s}
-.btn-solid{background:var(--indigo);color:var(--paper)}.btn-solid:hover{background:var(--burgundy, #762C35);border-color:#762C35}
+.btn-solid{background:var(--indigo);color:var(--paper)}.btn-solid:hover{background:var(--ink);border-color:var(--ink)}
 .btn-line{background:none;color:var(--indigo)}.btn-line:hover{background:var(--sand)}
 .btn-light{background:var(--paper);color:var(--indigo);border-color:var(--paper)}.btn-ghost{background:none;color:var(--paper);border-color:rgba(247,245,240,.6)}.btn-ghost:hover,.btn-light:hover{background:var(--sand);color:var(--indigo)}
 .btn[aria-disabled=true]{opacity:.55;cursor:not-allowed}
@@ -36,7 +28,7 @@ nav{display:flex;align-items:center;gap:.25rem;position:relative}nav a{text-deco
 .stitched{position:relative}.stitched::after{content:"";position:absolute;inset:14px;border:3px dashed #D9A04A;border-radius:6px;pointer-events:none;filter:drop-shadow(0 0 1.5px rgba(15,25,45,.7)) drop-shadow(0 0 1px rgba(15,25,45,.5))}
 .hero{display:grid;grid-template-columns:1.05fr 1fr;gap:3rem;align-items:center;padding:3.5rem 0}
 .hero-copy p{font-size:1.15rem}.actions{display:flex;flex-wrap:wrap;gap:.8rem;margin:1.6rem 0 1rem}
-.hero-art{--w:#203D56;border-radius:var(--r);aspect-ratio:4/4.4;display:grid;place-items:center;padding:12%}.hero-art svg{width:100%;height:100%}
+.hero-art{--w:#2d4a78;border-radius:var(--r);aspect-ratio:4/4.4;display:grid;place-items:center;padding:12%}.hero-art svg{width:100%;height:100%}
 .cats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
 .cat{all:unset;box-sizing:border-box;cursor:pointer;display:block;border:1px solid var(--sand);border-radius:var(--r);background:#fff;overflow:hidden}
 .cat .ph{aspect-ratio:1;border-radius:0}.cat span{display:block;padding:.8rem 1rem}.cat b{font:400 1.1rem var(--serif);color:var(--indigo);display:block}.cat small{color:#555}
@@ -50,7 +42,7 @@ nav{display:flex;align-items:center;gap:.25rem;position:relative}nav a{text-deco
 .card h3{margin:.3rem 0 0}.card p{margin:0;font-size:.95rem}.price{font-weight:600;color:var(--indigo)}
 .row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.4rem}.row .btn{flex:1 1 auto;min-width:130px}
 .story{background:var(--sand);margin-top:4.5rem}.split{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;padding:4.5rem 0}
-.swatch{--w:#203D56;border-radius:var(--r);aspect-ratio:1;max-height:440px;width:100%}
+.swatch{--w:#3a5a8a;border-radius:var(--r);aspect-ratio:1;max-height:440px;width:100%}
 .craft{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}.craft article{border-top:2px solid var(--indigo);padding-top:1rem}.craft p{font-size:.95rem}
 .link{font-weight:600;color:var(--indigo)}
 .steps{max-width:62ch;padding-left:1.2rem}.steps li{padding:.4rem 0}
