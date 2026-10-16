@@ -1,6 +1,6 @@
 /* ===== CONFIGURATION: edit this block ===== */
 const CONFIG = {
-  BRAND_NAME: "ReWeave",
+  BRAND_NAME: "Kintsugi",
   WHATSAPP_NUMBER: "919667461993",   // international format, digits only, e.g. "919876543210"
   INSTAGRAM_URL: "",     // e.g. "https://instagram.com/yourbrand"
   EMAIL: "",             // e.g. "hello@example.com"
@@ -130,7 +130,7 @@ window.applyImages=function(map){PRODUCTS.forEach(p=>{if(map[p.id])p.image=map[p
 
 // ===== Shopping bag (client-side, saved in localStorage) =====
 // Optional product fields: sizes:["S","M"], colours:["Indigo"], unavailable:true. Prices must be numbers.
-const CART_KEY="reweave.cart.v1",MAXQ=99,cartDlg=$("#cart");
+const CART_KEY="kintsugi.cart.v1",MAXQ=99,cartDlg=$("#cart");
 let cart=[],canStore=true,curP=null;
 const prod=id=>PRODUCTS.find(p=>p.id===id),fmt=n=>n.toLocaleString("en-IN");
 function needsOpts(p){return !!((p.sizes&&p.sizes.length)||(p.colours&&p.colours.length))}
