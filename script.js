@@ -2,7 +2,7 @@
 const CONFIG = {
   BRAND_NAME: "Kintsugi",
   WHATSAPP_NUMBER: "919667461993",   // international format, digits only, e.g. "919876543210"
-  INSTAGRAM_URL: "",     // e.g. "https://instagram.com/yourbrand"
+  INSTAGRAM_URL: "https://www.instagram.com/kintsugiofficial___/",
   EMAIL: "",             // e.g. "hello@example.com"
   ANNOUNCEMENT: "Introducing our first collection.", // set "" to hide the bar
   HERO_PRODUCT: "carry-all", // id of the product whose photo shows in the hero; "" for the illustration
