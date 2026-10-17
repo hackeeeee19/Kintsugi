@@ -87,4 +87,4 @@ dialog.drawer[open]{display:flex;flex-direction:column}
 
 /* Kintsugi floral recycling mark */
 .wordmark .brand-mark{width:34px;height:34px;object-fit:cover;border-radius:50%;display:block}
-.foot-logo{width:min(180px,100%);height:auto;display:block;margin-bottom:.75rem}
+.foot-logo{width:min(180px,100%);height:auto;display:block;margin:0;background:transparent}
